@@ -86,7 +86,8 @@ onBeforeUnmount(() => {
 .site-header {
   background: #00040c;
   border-bottom: 1px solid #262626;
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 10;
 }
 .container {

@@ -6,7 +6,8 @@
   --border: #262626;
   --text: #f2f2f2;
   --muted: #b8b8b8;
-  --accent: #10b981; /* green accent */
+  --accent: #10b981;
+  /* green accent */
   --accent-contrast: #071a12;
   --radius: 12px;
   --container: 1120px;
@@ -39,11 +40,14 @@ body {
 }
 
 /* Typography */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: "Playfair Display", Georgia, serif;
   margin: 0 0 0.5rem 0;
   line-height: 1.2;
 }
+
 p {
   margin: 0 0 1rem 0;
   color: var(--muted);
@@ -55,19 +59,24 @@ p {
   max-width: var(--container);
   padding: 0 1rem;
 }
+
 .section {
   padding: 3.5rem 0;
 }
+
 .section-tight {
   padding: 2rem 0;
 }
+
 .grid {
   display: grid;
   gap: 1rem;
 }
+
 .grid-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
+
 @media (max-width: 900px) {
   .grid-3 {
     grid-template-columns: 1fr;
@@ -80,7 +89,7 @@ p {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.25rem;
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.02) inset;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
 }
 
 /* Buttons */
@@ -97,22 +106,31 @@ p {
   font-weight: 600;
   transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.04s;
 }
-.btn:hover { border-color: #3a3a3a; }
-.btn:active { transform: translateY(1px); }
+
+.btn:hover {
+  border-color: #3a3a3a;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
 
 .btn-primary {
   background: var(--accent);
   border-color: var(--accent);
   color: #001b0f;
 }
+
 .btn-primary:hover {
   filter: brightness(1.06);
 }
+
 .btn-outline {
   background: transparent;
 }
+
 .btn-ghost {
-  background: rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 /* Hero */
@@ -124,14 +142,17 @@ p {
   text-align: center;
   overflow: hidden;
 }
+
 .hero .inner {
   max-width: 900px;
   padding: 1rem;
 }
+
 .hero h1 {
   font-size: clamp(2rem, 5vw, 3.5rem);
   color: #fff;
 }
+
 .hero .cta {
   display: flex;
   gap: 0.75rem;
@@ -139,8 +160,9 @@ p {
   justify-content: center;
   margin-top: 1.25rem;
 }
+
 .hero .panel {
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(6px);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -150,13 +172,16 @@ p {
 /* Banner */
 .banner {
   text-align: center;
-  margin: 2rem auto 0;
+  margin: 0px;
+  margin-left: 1rem;
+  margin-right: 1rem;
   background: var(--card);
   border: 1px solid var(--border);
   color: #eaeaea;
   border-radius: var(--radius);
   padding: 1rem 1.25rem;
 }
+
 .banner strong {
   color: var(--accent);
 }
@@ -172,14 +197,29 @@ p {
   padding: 0.75rem 0.9rem;
   font: inherit;
 }
-.textarea { min-height: 120px; resize: vertical; }
-.label { color: #dcdcdc; font-weight: 600; display: block; margin-bottom: 0.4rem; }
-.helper { color: var(--muted); font-size: 0.9rem; }
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.label {
+  color: #dcdcdc;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.helper {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
 
 .form-grid {
   display: grid;
   gap: 1rem;
 }
+
 @media (min-width: 720px) {
   .form-grid.two {
     grid-template-columns: 1fr 1fr;
@@ -187,18 +227,54 @@ p {
 }
 
 /* Utilities */
-.center { text-align: center; }
-.m0 { margin: 0; }
-.mt1 { margin-top: 0.5rem; }
-.mt2 { margin-top: 1rem; }
-.mt3 { margin-top: 1.5rem; }
-.mt4 { margin-top: 2rem; }
-.mb2 { margin-bottom: 1rem; }
-.mb3 { margin-bottom: 1.5rem; }
-.mb4 { margin-bottom: 2rem; }
-.dim { color: var(--muted); }
-.link { color: #dfe7ff; text-decoration: none; }
-.link:hover { text-decoration: underline; }
+.center {
+  text-align: center;
+}
+
+.m0 {
+  margin: 0;
+}
+
+.mt1 {
+  margin-top: 0.5rem;
+}
+
+.mt2 {
+  margin-top: 1rem;
+}
+
+.mt3 {
+  margin-top: 1.5rem;
+}
+
+.mt4 {
+  margin-top: 2rem;
+}
+
+.mb2 {
+  margin-bottom: 1rem;
+}
+
+.mb3 {
+  margin-bottom: 1.5rem;
+}
+
+.mb4 {
+  margin-bottom: 2rem;
+}
+
+.dim {
+  color: var(--muted);
+}
+
+.link {
+  color: #dfe7ff;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
 
 /* Simple placeholder tiles (for gallery) */
 .tile {
@@ -209,4 +285,6 @@ p {
 }
 
 /* Override default anchor color */
-a { color: inherit; }
+a {
+  color: inherit;
+}
