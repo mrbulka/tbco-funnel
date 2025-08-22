@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="280" height="64" viewBox="0 0 280 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="XcelAlgo placeholder logo">
+  <rect x="0.5" y="0.5" width="279" height="63" rx="10" fill="#0F0F0F" stroke="#2A2A2A"/>
+  <g transform="translate(16,12)">
+    <text x="0" y="24" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF">Xcel</text>
+    <text x="78" y="24" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#10B981">Algo</text>
+    <text x="0" y="45" font-family="Inter, Arial, sans-serif" font-size="10" fill="#B8B8B8">Placeholder — replace with official logo</text>
+  </g>
+</svg>
