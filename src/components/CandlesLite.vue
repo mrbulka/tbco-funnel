@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { createChart, ColorType, type CandlestickData, type UTCTimestamp } from 'lightweight-charts';
+import { createChart, ColorType, CandlestickSeries, type CandlestickData, type UTCTimestamp } from 'lightweight-charts';
 import { onMounted, onBeforeUnmount, ref } from 'vue';
 
 const props = withDefaults(defineProps<{
@@ -64,12 +64,11 @@ onMounted(() => {
     localization: { priceFormatter: (p: number) => p.toFixed(2) },
   });
 
-  series = chart.addCandlestickSeries({
+  series = chart.addSeries(CandlestickSeries, {
     upColor: '#10b981',
     wickUpColor: '#86efac',
     downColor: '#ef4444',
     wickDownColor: '#fca5a5',
-    borderVisible: false,
   });
 
   series.setData(generateData(60));
