@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import CandlesLite from '@/components/CandlesLite.vue';
+
 const discordUrl = 'https://discord.gg/nhPwQN8g';
 </script>
 
@@ -8,6 +10,9 @@ const discordUrl = 'https://discord.gg/nhPwQN8g';
     <div class="inner">
       <div class="panel">
         <h1>Empowering Traders. <br />Building Wealth.</h1>
+        <p class="hero-subtitle">
+          AI-driven signals, insights, and education to help you trade with confidence.
+        </p>
         <div class="cta">
           <a href="#about" class="btn btn-outline">Learn More</a>
           <a :href="discordUrl" target="_blank" rel="noopener" class="btn btn-primary">
@@ -26,22 +31,35 @@ const discordUrl = 'https://discord.gg/nhPwQN8g';
 
   <!-- Who we are / Mission -->
   <section class="section">
-    <div class="container grid" style="grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem;">
-      <div class="card">
-        <h2>Who we Are</h2>
-        <p class="mt2">
-          TBCO Investment Group is a community of expert traders who specialize in day trading across diverse asset
-          classes, including equities, derivatives, and cryptocurrencies. Our mission is to foster a collaborative
-          environment where traders of all experience levels can thrive and achieve financial success together.
-        </p>
+    <div class="container">
+      <!-- Row 1 (text left, graphic right) -->
+      <div class="feature-row">
+        <div class="feature-text card">
+          <h2>Who we Are</h2>
+          <p class="mt2">
+            TBCO Investment Group is a community of expert traders who specialize in day trading across diverse asset
+            classes, including equities, derivatives, and cryptocurrencies. Our mission is to foster a collaborative
+            environment where traders of all experience levels can thrive and achieve financial success together.
+          </p>
+        </div>
+        <div class="feature-graphic card" aria-hidden="true">
+          <CandlesLite :height="200" />
+        </div>
       </div>
-      <div class="card">
-        <h2>Our Mission</h2>
-        <p class="mt2">
-          At TBCO Investment Group, we empower traders with the resources they need to make confident decisions in
-          dynamic markets. By utilizing advanced algorithms and AI-driven insights, we help optimize investment
-          strategies to empower traders to meet their goals.
-        </p>
+
+      <!-- Row 2 (graphic left, text right) -->
+      <div class="feature-row right mt2">
+        <div class="feature-text card">
+          <h2>Our Mission</h2>
+          <p class="mt2">
+            At TBCO Investment Group, we empower traders with the resources they need to make confident decisions in
+            dynamic markets. By utilizing advanced algorithms and AI-driven insights, we help optimize investment
+            strategies to empower traders to meet their goals.
+          </p>
+        </div>
+        <div class="feature-graphic card" aria-hidden="true">
+          <CandlesLite :height="200" />
+        </div>
       </div>
     </div>
   </section>
@@ -156,8 +174,70 @@ const discordUrl = 'https://discord.gg/nhPwQN8g';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(1200px 400px at 50% -10%, rgba(16, 185, 129, 0.15), transparent 60%),
+    radial-gradient(1000px 320px at 12% -8%, rgba(16, 185, 129, 0.16), transparent 60%),
+    radial-gradient(900px 300px at 88% -2%, rgba(16, 185, 129, 0.10), transparent 60%),
     linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(11, 11, 11, 1));
   pointer-events: none;
+}
+
+/* Hero subtitle */
+.hero .hero-subtitle {
+  margin-top: 0.5rem;
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  color: var(--muted);
+}
+
+/* Alternating feature rows */
+.feature-row {
+  display: grid;
+  gap: 1rem;
+}
+
+/* desktop layout */
+@media (min-width: 900px) {
+  .feature-row {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+  }
+  .feature-row.right .feature-text {
+    order: 2;
+  }
+  .feature-row.right .feature-graphic {
+    order: 1;
+  }
+}
+
+/* Graphic panel */
+.feature-graphic {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(360px 220px at 70% 30%, rgba(16, 185, 129, 0.15), transparent 70%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.0));
+}
+
+/* SVG sizing */
+.candles {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 6px 18px rgba(16, 185, 129, 0.12));
+}
+
+/* Soft inner vignette */
+.feature-graphic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+/* Remove borders on feature cards */
+.feature-text.card,
+.feature-graphic.card {
+  border: none;
+  box-shadow: none;
 }
 </style>
