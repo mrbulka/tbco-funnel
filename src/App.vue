@@ -152,6 +152,7 @@ onBeforeUnmount(() => {
 }
 .header-cta {
   margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 /* Main */
