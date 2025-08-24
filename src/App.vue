@@ -3,6 +3,8 @@ import { RouterLink, RouterView } from 'vue-router';
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import tbcoLogo from './assets/tbco_logo.jpeg';
 
+const discordUrl = 'https://discord.gg/nhPwQN8g';
+
 const mobileMenuOpen = ref(false);
 function toggleMenu() {
   mobileMenuOpen.value = !mobileMenuOpen.value;
@@ -49,9 +51,10 @@ onBeforeUnmount(() => {
         <nav id="main-menu" :class="['main-nav', { open: mobileMenuOpen }]" aria-label="Main">
           <RouterLink to="/">Home</RouterLink>
           <RouterLink to="/community">Community</RouterLink>
-          <RouterLink to="/upgrade">Xcel Algo Upgrade</RouterLink>
           <RouterLink to="/resources">Resources</RouterLink>
           <RouterLink to="/contact">Contact</RouterLink>
+          <RouterLink to="/privacy">Privacy</RouterLink>
+          <a :href="discordUrl" target="_blank" rel="noopener" class="btn btn-primary header-cta">Join the Community</a>
         </nav>
       </div>
     </header>
@@ -65,9 +68,9 @@ onBeforeUnmount(() => {
         <nav class="footer-nav" aria-label="Footer">
           <RouterLink to="/">Home</RouterLink>
           <RouterLink to="/community">Community</RouterLink>
-          <RouterLink to="/upgrade">Xcel Algo Upgrade</RouterLink>
           <RouterLink to="/resources">Resources</RouterLink>
           <RouterLink to="/contact">Contact</RouterLink>
+          <RouterLink to="/privacy">Privacy</RouterLink>
         </nav>
         <p class="copyright">© 2025 The Big Cloud Organization.</p>
       </div>
@@ -137,11 +140,18 @@ onBeforeUnmount(() => {
 .main-nav a, .footer-nav a {
   color: #eaeaea;
   text-decoration: none;
-  padding: 0.4rem 0.5rem;
+  padding: 0.45rem 0.6rem;
   border-radius: 6px;
+  font-weight: 600;
 }
 .main-nav a.router-link-active {
   color: #0fd16a;
+}
+.main-nav a:hover, .footer-nav a:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.header-cta {
+  margin-left: 0.5rem;
 }
 
 /* Main */

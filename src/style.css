@@ -8,6 +8,9 @@
   --muted: #b8b8b8;
   --accent: #10b981;
   /* green accent */
+  --level-beginner: var(--accent);
+  --level-intermediate: #facc15;
+  --level-advanced: #3b82f6;
   --accent-contrast: #071a12;
   --radius: 12px;
   --container: 1120px;

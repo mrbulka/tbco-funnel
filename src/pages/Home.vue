@@ -1,7 +1,30 @@
 <script setup lang="ts">
+import { ref, computed, onMounted } from 'vue';
 import CandlesLite from '@/components/CandlesLite.vue';
+import { useDiscordWidget } from '@/composables/useDiscordWidget';
 
 const discordUrl = 'https://discord.gg/nhPwQN8g';
+
+// Discord live counts (widget must be enabled on the server)
+const { presenceCount, approxMemberCount } = useDiscordWidget();
+const displayMemberCount = computed(() => {
+  const n = approxMemberCount.value ?? presenceCount.value;
+  if (typeof n === 'number' && n > 0) return n.toLocaleString() + '+';
+  return '1,000+';
+});
+
+// Daily PnL strip (manual JSON updated in public/daily.json)
+type Daily = { date: string; totalPnl: string; topSymbols?: string[]; notes?: string };
+const daily = ref<Daily | null>(null);
+
+onMounted(async () => {
+  try {
+    const res = await fetch('/daily.json', { cache: 'no-store' });
+    if (res.ok) daily.value = (await res.json()) as Daily;
+  } catch {
+    // ignore; keep null
+  }
+});
 </script>
 
 <template>
@@ -24,8 +47,8 @@ const discordUrl = 'https://discord.gg/nhPwQN8g';
   </section>
 
   <div class="container section-tight">
-    <p id="about" class="banner">
-      Join <strong>1,000+ Traders</strong> Generating <strong>$1M+ Daily Volume</strong>
+    <p id="about" class="banner banner-lg">
+      Join <strong>{{ displayMemberCount }}</strong> Traders Generating <strong>$1M+ Daily Volume</strong>
     </p>
   </div>
 
@@ -35,11 +58,11 @@ const discordUrl = 'https://discord.gg/nhPwQN8g';
       <!-- Row 1 (text left, graphic right) -->
       <div class="feature-row">
         <div class="feature-text card">
-          <h2>Who we Are</h2>
+          <h2>Who We Are</h2>
           <p class="mt2">
-            TBCO Investment Group is a community of expert traders who specialize in day trading across diverse asset
-            classes, including equities, derivatives, and cryptocurrencies. Our mission is to foster a collaborative
-            environment where traders of all experience levels can thrive and achieve financial success together.
+            TBCO Investment Group is a community of active traders across equities, options, futures, and crypto.
+            We bring together beginners and seasoned professionals in a collaborative space built to share strategies,
+            refine skills, and win in the markets together.
           </p>
         </div>
         <div class="feature-graphic card" aria-hidden="true">
@@ -52,9 +75,8 @@ const discordUrl = 'https://discord.gg/nhPwQN8g';
         <div class="feature-text card">
           <h2>Our Mission</h2>
           <p class="mt2">
-            At TBCO Investment Group, we empower traders with the resources they need to make confident decisions in
-            dynamic markets. By utilizing advanced algorithms and AI-driven insights, we help optimize investment
-            strategies to empower traders to meet their goals.
+            We empower traders to act with confidence in fast-moving markets. Through advanced tools, expert insights,
+            and AI-driven strategies, we give our members the edge they need to adapt, optimize, and grow.
           </p>
         </div>
         <div class="feature-graphic card" aria-hidden="true">
@@ -68,24 +90,39 @@ const discordUrl = 'https://discord.gg/nhPwQN8g';
   <section class="section">
     <div class="container grid grid-3">
       <div class="card">
+        <div class="icon-clipart" aria-hidden="true">
+          <!-- Bell / signal -->
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+            <path d="M12 2a6 6 0 0 0-6 6v3.1c0 .6-.24 1.18-.66 1.6L4 14h16l-1.34-1.3a2.25 2.25 0 0 1-.66-1.6V8a6 6 0 0 0-6-6Zm0 20a3 3 0 0 0 3-3H9a3 3 0 0 0 3 3Z"/>
+          </svg>
+        </div>
         <h3>Real Time Signals</h3>
         <p class="mt2">
-          Stay ahead of the market with real-time trading signals from seasoned experts. Get instant updates on market
-          opportunities, buy/sell recommendations, and actionable strategies delivered directly to your fingertips.
+          Get instant market alerts: buy/sell calls, key levels, and strategies—delivered live.
         </p>
       </div>
       <div class="card">
+        <div class="icon-clipart" aria-hidden="true">
+          <!-- Chat bubble -->
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+            <path d="M20 2H4a2 2 0 0 0-2 2v14l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"/>
+          </svg>
+        </div>
         <h3>Collaborative Discussions</h3>
         <p class="mt2">
-          Engage in meaningful conversations with expert traders and fellow community members. Share insights, ask
-          questions, and refine your strategies in an interactive and supportive environment.
+          Trade smarter with expert insights, Q&A, and strategy talk inside a supportive community.
         </p>
       </div>
       <div class="card">
+        <div class="icon-clipart" aria-hidden="true">
+          <!-- Graduation cap -->
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+            <path d="M12 3 1 8l11 5 9-4.09V17h2V8L12 3Zm0 14L5 13.18V17l7 4 7-4v-3.82L12 17Z"/>
+          </svg>
+        </div>
         <h3>Financial Education</h3>
         <p class="mt2">
-          Expand your knowledge with exclusive tutorials, webinars, and market analysis reports. Whether you're a
-          beginner or an experienced trader, our resources are designed to help you grow your financial expertise.
+          Access tutorials, webinars, and reports—structured for beginners and advanced traders alike.
         </p>
       </div>
     </div>
@@ -95,7 +132,7 @@ const discordUrl = 'https://discord.gg/nhPwQN8g';
   <section class="section">
     <div class="container">
       <div class="card center">
-        <h2 class="m0">Join 1000+ Profitable Traders</h2>
+        <h2 class="m0">Join {{ displayMemberCount }} Traders</h2>
         <p class="mt2 dim">
           Step into a dynamic trading community where real-time signals, expert guidance, and collaborative learning
           come together. Whether you’re a seasoned trader or just starting, our community empowers you to trade smarter
@@ -106,22 +143,25 @@ const discordUrl = 'https://discord.gg/nhPwQN8g';
             Join Now — See Today’s Winning Trades
           </a>
         </div>
+        <div v-if="daily" class="pnl-strip mt2 helper">
+          Today’s Community PnL: <strong>{{ daily.totalPnl }}</strong>
+          <template v-if="daily.topSymbols?.length"> • Top: {{ daily.topSymbols.join(', ') }}</template>
+        </div>
       </div>
 
-      <!-- Placeholder screenshot grid -->
-      <div class="grid" style="grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; margin-top: 1rem;">
-        <div class="tile"></div>
-        <div class="tile"></div>
-        <div class="tile"></div>
-        <div class="tile" style="grid-column: span 2;"></div>
-        <div class="tile"></div>
-      </div>
-
-      <!-- Xcel promo -->
-      <div class="grid grid-3 mt4">
-        <div class="card center" style="grid-column: 1 / -1;">
-          <p class="m0">Want to see how members find these trades? Learn about our Xcel Algo Upgrade.</p>
-          <a href="/upgrade" class="btn btn-outline mt2">Discover Now</a>
+      <!-- Testimonials -->
+      <div class="grid testimonials mt3" style="grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem;">
+        <div class="card">
+          <p class="m0">“Signals called ES reversal to the tick. Locked gains and avoided a bad re-entry.”</p>
+          <p class="mt1 helper">— @M.K., Futures Trader</p>
+        </div>
+        <div class="card">
+          <p class="m0">“The Q&A and post-analysis changed my process. Fewer trades, better results.”</p>
+          <p class="mt1 helper">— @Alfa, Options</p>
+        </div>
+        <div class="card">
+          <p class="m0">“The overlays and levels gave me conviction to hold winners longer.”</p>
+          <p class="mt1 helper">— @Z., Equities</p>
         </div>
       </div>
     </div>
@@ -168,14 +208,14 @@ const discordUrl = 'https://discord.gg/nhPwQN8g';
 </template>
 
 <style scoped>
-/* Subtle backdrop for hero (no external image; replace later if needed) */
+/* Subtle backdrop for hero (banner-like depth) */
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(1000px 320px at 12% -8%, rgba(16, 185, 129, 0.16), transparent 60%),
-    radial-gradient(900px 300px at 88% -2%, rgba(16, 185, 129, 0.10), transparent 60%),
+    radial-gradient(1200px 380px at 12% -10%, rgba(16, 185, 129, 0.20), transparent 60%),
+    radial-gradient(1000px 340px at 88% -6%, rgba(16, 185, 129, 0.12), transparent 60%),
     linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(11, 11, 11, 1));
   pointer-events: none;
 }
@@ -239,5 +279,30 @@ const discordUrl = 'https://discord.gg/nhPwQN8g';
 .feature-graphic.card {
   border: none;
   box-shadow: none;
+}
+
+/* Larger banner emphasis */
+.banner.banner-lg {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  padding: 1.25rem 1.5rem;
+}
+
+/* Benefit clipart styling */
+.icon-clipart {
+  color: var(--accent);
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+/* Testimonials spacing */
+.testimonials .card p {
+  color: var(--text);
 }
 </style>

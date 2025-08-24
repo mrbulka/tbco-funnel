@@ -3,9 +3,9 @@ import { createRouter, createWebHistory, RouteRecordRaw, RouteLocationNormalized
 // Lazy-loaded pages
 const Home = () => import('../pages/Home.vue');
 const Community = () => import('../pages/Community.vue');
-const Upgrade = () => import('../pages/Upgrade.vue');
 const Resources = () => import('../pages/Resources.vue');
 const Contact = () => import('../pages/Contact.vue');
+const Privacy = () => import('../pages/Privacy.vue');
 
 const routes: RouteRecordRaw[] = [
   {
@@ -30,12 +30,16 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/upgrade',
-    name: 'Upgrade',
-    component: Upgrade,
+    redirect: '/community',
+  },
+  {
+    path: '/privacy',
+    name: 'Privacy',
+    component: Privacy,
     meta: {
-      title: 'XcelAlgo Upgrade — Precision Trading Tools',
+      title: 'Privacy Policy — TBCO Investment Group',
       description:
-        'Unlock XcelAlgo: precision trading signals, overlays, and forecasts. Designed to help identify high-probability entries and exits.',
+        'Learn how TBCO collects, uses, and protects your information across our website, newsletter, and Discord community.',
     },
   },
   {

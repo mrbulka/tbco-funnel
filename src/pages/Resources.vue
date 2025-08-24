@@ -25,6 +25,25 @@ const guides = [
     ]
   }
 ];
+
+const levelDescriptions: Record<string, string> = {
+  Beginner: 'Build the fundamentals every trader needs before scaling up.',
+  Intermediate: 'Level up your execution and refine your strategies.',
+  Advanced: 'Systematize your edge and think like a professional trader.'
+};
+
+function levelClass(title: string) {
+  switch (title) {
+    case 'Beginner':
+      return 'level-beginner';
+    case 'Intermediate':
+      return 'level-intermediate';
+    case 'Advanced':
+      return 'level-advanced';
+    default:
+      return '';
+  }
+}
 </script>
 
 <template>
@@ -39,8 +58,15 @@ const guides = [
 
       <!-- Guides -->
       <div class="grid grid-3 mt4">
-        <div v-for="g in guides" :key="g.title" class="card">
-          <h3>{{ g.title }}</h3>
+        <div
+          v-for="g in guides"
+          :key="g.title"
+          :class="['card', 'level-card', levelClass(g.title)]"
+        >
+          <h3 class="level-title">{{ g.title }}</h3>
+          <p class="level-desc mt1">
+            {{ levelDescriptions[g.title] }}
+          </p>
           <ul class="mt2 dim">
             <li v-for="it in g.items" :key="it">• {{ it }}</li>
           </ul>
@@ -50,7 +76,8 @@ const guides = [
 
       <!-- Newsletter -->
       <div class="card mt4">
-        <h2 class="m0">Newsletter</h2>
+        <h2 class="m0">Stay Ahead of the Market — Join Our Free Newsletter (Coming Soon)</h2>
+        <p class="mt1 dim">Be the first to receive our launch issues</p>
         <p class="mt1 dim">
           Subscribe for market insights, strategy notes, and community updates. An archive section will appear here as entries are published.
         </p>
@@ -81,6 +108,16 @@ const guides = [
           <p class="helper mt2">By subscribing you agree to our Privacy Policy. Placeholder link.</p>
         </form>
 
+        <!-- Upcoming issues -->
+        <div class="mt3">
+          <h3 class="m0">Upcoming Issues</h3>
+          <ul class="mt1 dim">
+            <li>“5 Mistakes New Traders Make (and How to Avoid Them)” — Coming Soon</li>
+            <li>“Macro Moves That Set the Tone for the Week” — Coming Soon</li>
+            <li>“The Psychology of Scaling Into Winners” — Coming Soon</li>
+          </ul>
+        </div>
+
         <!-- Archive placeholder -->
         <div class="grid mt4" style="grid-template-columns: repeat(3, minmax(0, 1fr));">
           <div class="card"><strong>Newsletter #1</strong><p class="mt1 dim">Coming soon — archive item placeholder.</p></div>
@@ -91,3 +128,41 @@ const guides = [
     </div>
   </section>
 </template>
+
+<style scoped>
+.level-card {
+  border-color: var(--border);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.level-card:hover {
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset;
+}
+.level-title {
+  margin: 0;
+}
+.level-desc {
+  color: var(--muted);
+}
+
+/* Color hierarchy by level */
+.level-beginner {
+  border-color: var(--level-beginner);
+}
+.level-beginner .level-title {
+  color: var(--level-beginner);
+}
+
+.level-intermediate {
+  border-color: var(--level-intermediate);
+}
+.level-intermediate .level-title {
+  color: var(--level-intermediate);
+}
+
+.level-advanced {
+  border-color: var(--level-advanced);
+}
+.level-advanced .level-title {
+  color: var(--level-advanced);
+}
+</style>
