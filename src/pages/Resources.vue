@@ -119,11 +119,6 @@ function levelClass(title: string) {
         </div>
 
         <!-- Archive placeholder -->
-        <div class="grid mt4" style="grid-template-columns: repeat(3, minmax(0, 1fr));">
-          <div class="card"><strong>Newsletter #1</strong><p class="mt1 dim">Coming soon — archive item placeholder.</p></div>
-          <div class="card"><strong>Newsletter #2</strong><p class="mt1 dim">Coming soon — archive item placeholder.</p></div>
-          <div class="card"><strong>Newsletter #3</strong><p class="mt1 dim">Coming soon — archive item placeholder.</p></div>
-        </div>
       </div>
     </div>
   </section>
