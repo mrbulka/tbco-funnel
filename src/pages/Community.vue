@@ -33,11 +33,11 @@ const rows: Row[] = [
         <p class="mt1 dim">
           Upgrade anytime to unlock premium tools and stay ahead of the market.
         </p>
-        <div class="mt2">
+        <div class="mt2 btn-with-discord">
           <a :href="discordUrl" target="_blank" rel="noopener" class="btn btn-primary">
-            <img :src="discordIconUrl" alt="" width="18" height="18" style="display:inline-block" />
             <span>Join the Community</span>
           </a>
+          <img :src="discordIconUrl" alt="" width="20" height="20" class="discord-outside" aria-hidden="true" />
         </div>
         <p v-if="onlineNow" class="helper mt1">{{ onlineNow }}</p>
       </div>
@@ -63,10 +63,12 @@ const rows: Row[] = [
           </div>
         </div>
         <div class="center mt3">
-          <a :href="discordUrl" target="_blank" rel="noopener" class="btn btn-primary">
-            <img :src="discordIconUrl" alt="" width="18" height="18" style="display:inline-block" />
-            <span>Join the Community</span>
-          </a>
+          <div class="btn-with-discord">
+            <a :href="discordUrl" target="_blank" rel="noopener" class="btn btn-primary">
+              <span>Join the Community</span>
+            </a>
+            <img :src="discordIconUrl" alt="" width="20" height="20" class="discord-outside" aria-hidden="true" />
+          </div>
         </div>
       </div>
 
@@ -184,4 +186,16 @@ const rows: Row[] = [
     grid-template-columns: 1fr auto auto;
   }
 }
+/* Button + Discord icon outside-right */
+.btn-with-discord {
+  display: inline-flex;
+  align-items: center;
+}
+.discord-outside {
+  margin-left: 0.5rem; /* space to the right of the button */
+  transform: translateX(2px); /* slightly further right */
+  pointer-events: none; /* decorative; don't capture clicks */
+  opacity: 0.95;
+}
+
 </style>
