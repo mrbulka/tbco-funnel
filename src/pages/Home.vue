@@ -48,7 +48,7 @@ onMounted(async () => {
 
   <div class="container section-tight">
     <p id="about" class="banner banner-lg">
-      Join <strong>{{ displayMemberCount }}</strong> Traders Generating <strong>$1M+ Daily Volume</strong>
+      Join <strong>1000+</strong> Traders Generating <strong>$1M+ Daily Volume</strong>
     </p>
   </div>
 
@@ -132,7 +132,7 @@ onMounted(async () => {
   <section class="section">
     <div class="container">
       <div class="card center">
-        <h2 class="m0">Join {{ displayMemberCount }} Traders</h2>
+        <h2 class="m0">Join 1000+ Traders</h2>
         <p class="mt2 dim">
           Step into a dynamic trading community where real-time signals, expert guidance, and collaborative learning
           come together. Whether you’re a seasoned trader or just starting, our community empowers you to trade smarter
