@@ -37,7 +37,7 @@ const rows: Row[] = [
           <a :href="discordUrl" target="_blank" rel="noopener" class="btn btn-primary">
             <span>Join the Community</span>
           </a>
-          <img :src="discordIconUrl" alt="" width="20" height="20" class="discord-outside" aria-hidden="true" />
+          <img :src="discordIconUrl" alt="Discord" class="discord-outside" />
         </div>
         <p v-if="onlineNow" class="helper mt1">{{ onlineNow }}</p>
       </div>
@@ -67,7 +67,7 @@ const rows: Row[] = [
             <a :href="discordUrl" target="_blank" rel="noopener" class="btn btn-primary">
               <span>Join the Community</span>
             </a>
-            <img :src="discordIconUrl" alt="" width="20" height="20" class="discord-outside" aria-hidden="true" />
+            <img :src="discordIconUrl" alt="Discord" class="discord-outside" />
           </div>
         </div>
       </div>
@@ -196,6 +196,9 @@ const rows: Row[] = [
   transform: translateX(2px); /* slightly further right */
   pointer-events: none; /* decorative; don't capture clicks */
   opacity: 0.95;
+  width: 32px; /* larger mascot */
+  height: auto; /* preserve aspect ratio */
+  filter: invert(1) brightness(2); /* tint image to white */
 }
 
 </style>
