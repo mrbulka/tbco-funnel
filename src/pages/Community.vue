@@ -163,9 +163,11 @@ const rows: Row[] = [
 .col {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .feature-col {
+  justify-content: start;
   color: var(--text);
 }
 
