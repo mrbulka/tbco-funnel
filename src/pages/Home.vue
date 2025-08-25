@@ -143,10 +143,6 @@ onMounted(async () => {
             Join Now — See Today’s Winning Trades
           </a>
         </div>
-        <div v-if="daily" class="pnl-strip mt2 helper">
-          Today’s Community PnL: <strong>{{ daily.totalPnl }}</strong>
-          <template v-if="daily.topSymbols?.length"> • Top: {{ daily.topSymbols.join(', ') }}</template>
-        </div>
       </div>
 
       <!-- Testimonials -->
