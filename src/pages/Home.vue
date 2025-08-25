@@ -25,6 +25,12 @@ onMounted(async () => {
     // ignore; keep null
   }
 });
+
+// Import all testimonial images from src/assets (eagerly) and map to URLs
+const modules = import.meta.glob('/src/assets/testimonial_*.png', { eager: true, import: 'default' });
+const testimonialImages = Object.entries(modules)
+  .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }))
+  .map(([, url]) => url as string);
 </script>
 
 <template>
@@ -146,19 +152,15 @@ onMounted(async () => {
       </div>
 
       <!-- Testimonials -->
-      <div class="grid testimonials mt3" style="grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem;">
-        <div class="card">
-          <p class="m0">“Signals called ES reversal to the tick. Locked gains and avoided a bad re-entry.”</p>
-          <p class="mt1 helper">— @M.K., Futures Trader</p>
-        </div>
-        <div class="card">
-          <p class="m0">“The Q&A and post-analysis changed my process. Fewer trades, better results.”</p>
-          <p class="mt1 helper">— @Alfa, Options</p>
-        </div>
-        <div class="card">
-          <p class="m0">“The overlays and levels gave me conviction to hold winners longer.”</p>
-          <p class="mt1 helper">— @Z., Equities</p>
-        </div>
+      <div class="testimonial-gallery mt3">
+        <img
+          v-for="(src, i) in testimonialImages"
+          :key="i"
+          :src="src"
+          class="testimonial-img"
+          alt="Community testimonial"
+          loading="lazy"
+        />
       </div>
     </div>
   </section>
@@ -313,5 +315,32 @@ onMounted(async () => {
   inset: 0;
   background: linear-gradient(to bottom, rgba(11, 11, 11, 0) 60%, var(--bg) 100%);
   pointer-events: none;
+}
+/* Responsive testimonial gallery */
+.testimonial-gallery {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 600px) {
+  .testimonial-gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 900px) {
+  .testimonial-gallery {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.testimonial-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
 }
 </style>
