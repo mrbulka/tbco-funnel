@@ -301,4 +301,17 @@ onMounted(async () => {
 .testimonials .card p {
   color: var(--text);
 }
+/* Hero background image and bottom blend */
+.hero {
+  background: url('@/assets/stocks-background.jpeg') center/cover no-repeat;
+  background-color: var(--bg);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(11, 11, 11, 0) 60%, var(--bg) 100%);
+  pointer-events: none;
+}
 </style>
