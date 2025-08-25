@@ -68,9 +68,8 @@ function levelClass(title: string) {
             {{ levelDescriptions[g.title] }}
           </p>
           <ul class="mt2 dim">
-            <li v-for="it in g.items" :key="it">• {{ it }}</li>
+            <li v-for="it in g.items" :key="it">{{ it }}</li>
           </ul>
-          <a href="#" class="btn btn-outline mt2">View Outline</a>
         </div>
       </div>
 
